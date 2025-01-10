@@ -1,0 +1,209 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.function-chain {
+  display: flex;
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.function-card {
+  width: 250px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  position: relative;
+}
+
+/* Card Header */
+.card-header {
+  font-size: 14px;
+  font-weight: bold;
+  color: #6c6c6c;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.dots {
+  font-size: 16px;
+}
+
+/* Card Content */
+.card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6c6c6c;
+  margin-bottom: 5px;
+}
+
+.input-box,
+.dropdown {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 8px;
+  font-size: 14px;
+  background-color: #f9f9f9;
+}
+
+/* Card Footer */
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #e6e6e6;
+}
+
+.connector-label {
+  font-size: 12px;
+  font-weight: bold;
+  color: #6c6c6c;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Connector styling for visual effect */
+.connector-label::before {
+  content: "";
+  display: block;
+  width: 8px;
+  height: 8px;
+  background-color: #007bff;
+  border-radius: 50%;
+}
+
+.initial-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Label styling */
+.input-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff; /* Assuming white text */
+  background-color: #ffc267; /* Orange background */
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+
+/* Input and connector container */
+.initial-input {
+  display: flex;
+  align-items: center;
+  width: 150px;
+  height: 50px;
+  border: 2px solid #ffc267;
+  border-radius: 15px;
+  overflow: hidden; /* To ensure rounded corners */
+}
+
+/* Input field styling */
+.input-field {
+  width: 50%;
+  height: 100%;
+  border: none;
+  outline: none;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #000;
+  background-color: transparent;
+}
+
+/* Connector styling */
+.connector {
+  width: 50%;
+  height: 100%;
+  border-left: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f0f0; /* Light background */
+}
+
+/* Container for output and label */
+.final-output-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Label styling */
+.output-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff; /* Assuming white text */
+  background-color: #4caf79; /* Orange background */
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+
+/* Output container */
+.final-output {
+  display: flex;
+  align-items: center;
+  width: 150px;
+  height: 50px;
+  border: 2px solid #4caf79;
+  border-radius: 15px;
+  overflow: hidden; /* To ensure rounded corners */
+}
+
+/* Output field styling */
+.output-field {
+  width: 50%;
+  height: 100%;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #000;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0; /* Remove default margin of <p> */
+}
+
+/* Connector styling */
+.connector {
+  width: 50%;
+  height: 100%;
+  border-left: 1px solid #ccc;
+  background-color: #f0f0f0; /* Light background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.input-label-card {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6c6c6c;
+  margin-bottom: 5px;
+  font-family: Inter;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14.52px;
+  text-align: left;
+  color: #252525;
+}
