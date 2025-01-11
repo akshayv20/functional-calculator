@@ -35,6 +35,7 @@
 
 .dots {
   font-size: 16px;
+  z-index: 1;
 }
 
 /* Card Content */
@@ -70,7 +71,8 @@
   border-top: 1px solid #e6e6e6;
 }
 
-.connector-label {
+.connector-label-input,
+.connector-label-output {
   font-size: 12px;
   font-weight: bold;
   color: #6c6c6c;
@@ -80,7 +82,17 @@
 }
 
 /* Connector styling for visual effect */
-.connector-label::before {
+
+.connector-label-input::before {
+  content: "";
+  display: block;
+  width: 8px;
+  height: 8px;
+  background-color: #007bff;
+  border-radius: 50%;
+}
+
+.connector-label-output::after {
   content: "";
   display: block;
   width: 8px;
@@ -206,4 +218,38 @@
   line-height: 14.52px;
   text-align: left;
   color: #252525;
+}
+.app-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.function-card {
+  width: 200px;
+  /* height: 100px; */
+  /* background: #fff; */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  position: absolute;
+}
+
+.initial-input-container,
+.final-output-container {
+  position: absolute;
+  background: #fff;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.line-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  pointer-events: none; /* Allows interaction with elements below */
+  z-index: 1;
 }

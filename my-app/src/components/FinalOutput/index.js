@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-
-const FinalOutput = ({ value, onDrag }) => {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+import "./styles.css";
+const FinalOutput = ({ value, position, onDrag }) => {
+  const [outputPosition, setOutputPosition] = useState(position); // Initialize position from parent
   const containerRef = useRef(null);
 
   const handleMouseDown = (e) => {
@@ -10,11 +10,11 @@ const FinalOutput = ({ value, onDrag }) => {
     const rect = containerRef.current.getBoundingClientRect();
 
     const handleMouseMove = (e) => {
-      const newX = position.x + (e.clientX - startX);
-      const newY = position.y + (e.clientY - startY);
+      const newX = outputPosition.x + (e.clientX - startX);
+      const newY = outputPosition.y + (e.clientY - startY);
 
-      setPosition({ x: newX, y: newY });
-      if (onDrag) onDrag({ x: rect.left + newX, y: rect.top + newY });
+      setOutputPosition({ x: newX, y: newY });
+      if (onDrag) onDrag({ id: "final", position: { x: newX, y: newY } }); // Notify parent of new position
     };
 
     const handleMouseUp = () => {
@@ -28,21 +28,30 @@ const FinalOutput = ({ value, onDrag }) => {
 
   useEffect(() => {
     if (containerRef.current) {
-      containerRef.current.style.transform = `translate(${position.x}px, ${position.y}px)`;
+      containerRef.current.style.transform = `translate(${outputPosition.x}px, ${outputPosition.y}px)`;
     }
-  }, [position]);
+  }, [outputPosition]);
 
   return (
     <div
       ref={containerRef}
       className='final-output-container'
       onMouseDown={handleMouseDown}
-      style={{ position: "absolute", left: position.x, top: position.y }}
+      style={{
+        position: "absolute",
+        left: outputPosition.x,
+        top: outputPosition.y
+      }}
     >
       <label className='output-label'>Final Output (y)</label>
       <div className='final-output'>
         <p className='output-field'>{value}</p>
-        <div className='connector' id='final-connector'></div>
+        <div className='connector' id='final-connector'>
+          <div
+            className='connector-label-output'
+            id='final-connector-label'
+          ></div>
+        </div>
       </div>
     </div>
   );

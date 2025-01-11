@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-
-const InitialInput = ({ value, setValue, onDrag }) => {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+import "./styles.css";
+const InitialInput = ({ value, setValue, position, onDrag }) => {
+  const [inputPosition, setInputPosition] = useState(position); // Initialize position from parent
   const containerRef = useRef(null);
 
   const handleMouseDown = (e) => {
@@ -10,11 +10,11 @@ const InitialInput = ({ value, setValue, onDrag }) => {
     const rect = containerRef.current.getBoundingClientRect();
 
     const handleMouseMove = (e) => {
-      const newX = position.x + (e.clientX - startX);
-      const newY = position.y + (e.clientY - startY);
+      const newX = inputPosition.x + (e.clientX - startX);
+      const newY = inputPosition.y + (e.clientY - startY);
 
-      setPosition({ x: newX, y: newY });
-      if (onDrag) onDrag({ x: rect.left + newX, y: rect.top + newY });
+      setInputPosition({ x: newX, y: newY });
+      if (onDrag) onDrag({ id: "initial", position: { x: newX, y: newY } }); // Notify parent of new position
     };
 
     const handleMouseUp = () => {
@@ -28,16 +28,20 @@ const InitialInput = ({ value, setValue, onDrag }) => {
 
   useEffect(() => {
     if (containerRef.current) {
-      containerRef.current.style.transform = `translate(${position.x}px, ${position.y}px)`;
+      containerRef.current.style.transform = `translate(${inputPosition.x}px, ${inputPosition.y}px)`;
     }
-  }, [position]);
+  }, [inputPosition]);
 
   return (
     <div
       ref={containerRef}
       className='initial-input-container'
       onMouseDown={handleMouseDown}
-      style={{ position: "absolute", left: position.x, top: position.y }}
+      style={{
+        position: "absolute",
+        left: inputPosition.x,
+        top: inputPosition.y
+      }}
     >
       <label className='input-label'>Initial value of x</label>
       <div className='initial-input'>
@@ -47,7 +51,12 @@ const InitialInput = ({ value, setValue, onDrag }) => {
           onChange={(e) => setValue(Number(e.target.value))}
           className='input-field'
         />
-        <div className='connector' id='initial-connector'></div>
+        <div className='connector' id='initial-connector'>
+          <div
+            className='connector-label-input'
+            id='connector-label-input'
+          ></div>
+        </div>
       </div>
     </div>
   );
