@@ -7,11 +7,11 @@ import "./App.css";
 const App = () => {
   const [initialValue, setInitialValue] = useState(0);
   const [functions, setFunctions] = useState([
-    { id: 1, equation: "x^2", next: 2 },
-    { id: 2, equation: "2x+4", next: 4 },
-    { id: 3, equation: "x^2+20", next: null },
-    { id: 4, equation: "x-2", next: 5 },
-    { id: 5, equation: "x/2", next: 3 }
+    { id: 1, equation: "x^2", next: null, prev: "initial" },
+    { id: 2, equation: "2x+4", next: null, prev: null },
+    { id: 3, equation: "x^2+20", next: null, prev: null },
+    { id: 4, equation: "x-2", next: null, prev: null },
+    { id: 5, equation: "x/2", next: null, prev: null }
   ]);
   const [positions, setPositions] = useState({
     initial: { x: 10, y: 30 },
