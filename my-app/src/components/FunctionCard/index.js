@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import "./styles.css";
+
 const FunctionCard = ({
   functionData,
   position,
@@ -12,14 +13,15 @@ const FunctionCard = ({
   const cardRef = useRef(null);
 
   const handleMouseDown = (e) => {
-    const card = cardRef.current;
     const startX = e.clientX;
     const startY = e.clientY;
-    const rect = card.getBoundingClientRect();
 
-    const handleMouseMove = (e) => {
-      const newX = cardPosition.x + (e.clientX - startX);
-      const newY = cardPosition.y + (e.clientY - startY);
+    const handleMouseMove = (moveEvent) => {
+      const deltaX = moveEvent.clientX - startX;
+      const deltaY = moveEvent.clientY - startY;
+
+      const newX = cardPosition.x + deltaX;
+      const newY = cardPosition.y + deltaY;
 
       setCardPosition({ x: newX, y: newY });
       onDrag(id, { x: newX, y: newY }); // Notify parent component about the new position
@@ -59,10 +61,22 @@ const FunctionCard = ({
       </div>
       <div className='card-content'>
         <label className='input-label-card'>Equation</label>
-        <input type='text' value={equation} readOnly className='input-box' />
+        <input
+          type='text'
+          value={equation}
+          onChange={(e) => {
+            setFunctions((prev) =>
+              prev.map((itm) =>
+                itm.id === id ? { ...itm, equation: e.target.value } : itm
+              )
+            );
+          }}
+          className='input-box'
+        />
         <label className='input-label-card'>Next function</label>
         <select
           className='dropdown'
+          value={next}
           onChange={(e) =>
             setFunctions((prev) =>
               prev.map((itm) =>
@@ -71,15 +85,14 @@ const FunctionCard = ({
             )
           }
         >
-          {functions.map((itm) => {
-            return (
-              itm.next !== id && (
-                <option value={itm.next || ""}>
-                  {itm.next ? `Function: ${itm.next}` : "-"}
-                </option>
-              )
-            );
-          })}
+          <option value=''>-</option>
+          {functions.map((itm) =>
+            itm.id !== id ? (
+              <option key={itm.id} value={itm.id}>
+                Function: {itm.id}
+              </option>
+            ) : null
+          )}
         </select>
       </div>
       <div className='card-footer'>
